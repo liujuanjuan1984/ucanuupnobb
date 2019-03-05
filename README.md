@@ -10,7 +10,7 @@ you can you up, no bb.
 
 第2次：3月3日-4日
 
-注册github账号，并创建一个新项目/新仓库 Create a new repository ，熟悉 Readmine 与 issues 的使用。
+注册github账号，并创建一个新项目/新仓库 Create a new repository ，熟悉所建立的 repository Readme 与 issues 的使用。
 
 继续在vscode上增加你的学习记录。
 
