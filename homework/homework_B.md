@@ -1,4 +1,3 @@
-
 ## hello python，极简开始的python编程之旅。
 
 ### 第1次：安装python并获取多本教程
