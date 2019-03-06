@@ -12,9 +12,9 @@ you can you up, no bb.
 
 下列内容，只是提供作业，并不是提供教学。主要还是依靠自学、并在兴趣小组中互受鼓舞。
 
-A系列：[准备vscode + github，并熟悉github的最少必要操作。](https://github.com/liujuanjuan1984/ucanuupnobb/homework/homework_A.md)
+A系列：[准备vscode + github，并熟悉github的最少必要操作。](https://github.com/liujuanjuan1984/ucanuupnobb/blob/master/homework/homework_A.md)
 
-B系列：[hello python，极简开始的python编程之旅。](https://github.com/liujuanjuan1984/ucanuupnobb/homework/homework_B.md)
+B系列：[hello python，极简开始的python编程之旅。](https://github.com/liujuanjuan1984/ucanuupnobb/blob/master/homework/homework_B.md)
 
 建议记录你在编程这件事上的时间投入，但不做自我评判，单纯记录而已。
 
