@@ -3,6 +3,8 @@ import random
 """
 String的各种骚操作：
 
+https://docs.python.org/3/tutorial/inputoutput.html
+
 """
 
 #字符串的赋值与操作
@@ -80,26 +82,7 @@ for x in estr[:]:
     print(estr)
     print(estr[:]) #无论是否切片，目前这种方式都不会改变字符串。
 
-alist = ['liu','juan','juan']
-
-#列表不切片，直接对列表操作，导致了列表被改变。
-#此段代码很容易陷入无限循环，只有通过breakTag来实现循环次数控制。
-breakTag = 4
-for y in alist : # 原本以为列表有3个元素，会遍历3次
-    breakTag = breakTag - 1
-    if breakTag > 0 :
-        alist.append('@') #但这个操作让每一次遍历就会增加1个元素，并回归到 for 那句判断，从而导致无限循环。
-        print(y,alist)
-
-print("\n开始演示切片控制列表被改变所带来的影响\n")
-dlist = ['liu','juan','juan']
-blist = dlist[:]
-for y in dlist:#并没有操作dlist，所以无需担心无限循环。
-    dlist[:].append('@')
-    blist.append("$")
-    print(y,'：此时dlist是',dlist)
-    print(y,'：此时dlist[:]是',dlist[:])
-    print(y,'：此时blist是',blist)
+#操作列表导致列表被改变而带来的问题，可以查看list.py
 
 
 #尚未不了解的方法还有很多……

@@ -98,11 +98,13 @@
 
 1、在 vscode 中，打开 terminal，并进入到你的仓库。
 
-> 如何打开？请自行找答案。
+> 如何打开 terminal ？如何在 terminal 进入到你的仓库目录地址，复习昨天的作业。
 
 2、采用以下指令，把你的学习记录上传到 github 上。
 
-`git add 文件名/文件地址 `
+> 依次在 terminal 执行下面三条指令；可以访问github你的主页，查看是否产生新的commit记录。
+
+`git add 文件名/文件夹 ` 上传指定文件/文件夹 或者 `git add -A` 上传当前目录下所有
 
 `git commit -m "你的注释"`
 
