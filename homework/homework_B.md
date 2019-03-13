@@ -53,6 +53,8 @@ not True
 
 5、所有练习推送提交到github。
 
+注：最初，你只用写自己的简版笔记即可。也可以参阅更多人的，看看还有哪些花样玩法。比如我写的 [boolean sample](https://github.com/liujuanjuan1984/ucanuupnobb/blob/master/homework_sample/boolean.py)
+
 ### 第4次：熟悉if条件语句。
 
 1、阅读相关电子书，对照参考，熟悉 if 的各种用法。
