@@ -50,7 +50,7 @@
 
 2.1 选择你本地电脑的一处地方，建立一个文件夹，比如：codingstudy 作为代码学习专用。
 
-2.2 在vscode中选择file - open fonder 打开上述文件夹。
+2.2 在vscode中选择file - open folder 打开上述文件夹。
 
 > 这个操作也可以直接在 vscode 中通过 explorer 分页来操作。看看自己是否能找到并掌握这种方式？
 
