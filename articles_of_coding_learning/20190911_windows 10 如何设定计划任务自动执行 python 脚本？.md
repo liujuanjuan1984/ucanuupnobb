@@ -79,12 +79,6 @@ C:\Users\username\python_side_projects\crawler\crawler_base\zhihu_topic_monitor_
 
 ![image](https://user-images.githubusercontent.com/31027645/64669499-5b171b00-d494-11e9-8637-af01eb818b99.png)
 
-简单来说，在计划任务属性页面，点击“更改用户或组”，输入用户名（比如我的“75801”），然后点击“检查名称”，再点击“确定”提交，就可以了。
+简单来说，在计划任务属性页面，点击“更改用户或组”，输入用户名（比如我的“75801”），然后点击“检查名称”，再点击“确定”提交，就可以了。详细的图文说明，请挪步我的另外一篇整理：
 
----
-
-about this article:
-
-**author**：[liujuanjuan1984](https://github.com/liujuanjuan1984)
-
-**press_date**：2019-9-11
+> [https://juejin.im/post/5d7881a6e51d453bdb1d9bd9](https://juejin.im/post/5d7881a6e51d453bdb1d9bd9)
