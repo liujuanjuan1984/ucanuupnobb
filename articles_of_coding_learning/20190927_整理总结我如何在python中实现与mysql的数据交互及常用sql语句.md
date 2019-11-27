@@ -1,4 +1,4 @@
-# 【呕心总结】python如何与mysql实现交互及常用sql语句
+# 【呕心总结】python 如何与 mysql 实现交互及常用 sql 语句
 
 9 月初，我对 `python 爬虫` 燃起兴趣，但爬取到的数据多通道实时同步读写用`文件`并不方便，于是开始用起`mysql`。这篇笔记，我将整理近一个月的实战中最常用到的 `mysql` 语句，同时也将涉及到如何在`python3`中与 `mysql` 实现数据交换。
 
@@ -10,9 +10,9 @@
 
 ## 一、建立连接与数据交互
 
-与 mysql 交互的方式，我目前共使用 4 种。其中采用管理员身份运行`命令行提示符（cmd）`查看 `mysql`，其操作图示可另写一篇。这里就不占篇幅了。mysql的可视化图形界面工具，我目前并没有用到，也没有迫切使用它的需要。另外 3 种方式都是通过 python 脚本进行。
+与 mysql 交互的方式，我目前共使用 4 种。其中采用管理员身份运行`命令行提示符（cmd）`查看 `mysql`，其操作图示可另写一篇。这里就不占篇幅了。mysql 的可视化图形界面工具，我目前并没有用到，也没有迫切使用它的需要。另外 3 种方式都是通过 python 脚本进行。
 
-### 情境A：python 演算得出数据，想要写入数据库
+### 情境 A：python 演算得出数据，想要写入数据库
 
 python 脚本已得到表格类大量数据，想要一次性写入数据库，常用代码如下：
 
@@ -22,15 +22,15 @@ import pandas as pd
 from sqlalchemy import create_engine
 conn_eng = create_engine('mysql+pymysql://username:password@localhost:3306/databasename',encoding='utf8')  
 
-# 调用 pandas 的方法，数据写入mysql
+# 调用 pandas 的方法，数据写入 mysql
 pd.io.sql.to_sql(your_df, "table_name", conn_eng, if_exists='append',index=False)
 
 ```
 表格类数据，我用的是 `pandas` 的 `dataframe` 结构。`pd.io.sql.to_sql()` 的参数还有许多其它用途，但上面这种是我个人使用最高频的。效果是：无需自己提前建表，将自动建新表。美中不足是：表的列属性自动生成，通常不合心意，还需检查和修改。
 
-如果不想用 `pd.io.sql.to_sql()` 或者想更精细、复杂的操作，则用到下面的情境C。
+如果不想用 `pd.io.sql.to_sql()` 或者想更精细、复杂的操作，则用到下面的情境 C。
 
-### 情境B：python 脚本想从 mysql 拿到数据
+### 情境 B：python 脚本想从 mysql 拿到数据
 
 如果已经存在某个表格，想要向该表格提交某条指令，需返回数据，我用的是 `pandas`的`read_sql
 ()` ，返回的数据类型是 `pandas` 的 `dataframe`。sql 查询语句挺好写的，具体总结在本文下方。
@@ -47,7 +47,7 @@ question_ids = pd.read_sql(sql_search,conn)
 conn.close()
 ```
 
-### 情境C：python 脚本单方面向 mysql 发出指令，无需拿到数据
+### 情境 C：python 脚本单方面向 mysql 发出指令，无需拿到数据
 
 如果已经存在某个表格，想要向该表格提交某条指令而无需返回数据时，比如：建表、对数据的增改删、对列的名称、列的属性修改等，代码如下。
 
@@ -80,22 +80,22 @@ cursor.close()
 conn.close()
 ```
 
-通过上面几种实用情况可以看到，`python` 与 `mysql` 实现交互的过程，通常分为：建立连接、把sql语句定义为字符串，提交指令、关闭连接。核心的技能在于 sql语句；除了定义sql语句字符串，其余3个处理都是固定的写法。
+通过上面几种实用情况可以看到，`python` 与 `mysql` 实现交互的过程，通常分为：建立连接、把 sql 语句定义为字符串，提交指令、关闭连接。核心的技能在于 sql 语句；除了定义 sql 语句字符串，其余 3 个处理都是固定的写法。
 
 我在最初一个月的实践中，最常出现的错误有：
 - 值的引用没有加上引号；
 - 符号错乱：多一个符号，少一个符号；
 - 值的类型不符合：不管 mysql 表格中该值是数，还是文本，在定义 sql 语句的字符串时，对每个值都需要转化为字符串；
-- 拷贝自己的代码时，忘记修改databasename。
+- 拷贝自己的代码时，忘记修改 databasename。
 
 
-## 二、sql语句：搜索查询
+## 二、sql 语句：搜索查询
 
 搜索是指在数据库的某个表格中查询符合特定条件的数据，并返回查询结果。其基本结构为：
 
 `SELECT 【范围】FROM table_name  【条件】;` 其中，范围是必须指定的，而条件可有可无。
 
-### 变量A：范围，是指返回查询结果的范围。
+### 变量 A：范围，是指返回查询结果的范围。
 
 返回该表格的所有字段，用 * 表达：
 
@@ -126,14 +126,14 @@ SELECT count(*) FROM table_name ;
 ```
 ![image](https://user-images.githubusercontent.com/31027645/65767216-cc76ef00-e15f-11e9-932c-1fa42fbde121.png)
 
-### 变量B：条件是指，期望返回的数据满足哪些条件。
+### 变量 B：条件是指，期望返回的数据满足哪些条件。
 
 不限定条件：
 
 ```mysql
 SELECT * FROM table_name ;
 ```
-数值类：某个字段（数值类型的，比如double或者int），数值比较的操作符都可以使用比如，大于`>`，小于`<`，等于 `=` ，大于等于 `>=` ，小于等于 `<=` ：
+数值类：某个字段（数值类型的，比如 double 或者 int），数值比较的操作符都可以使用比如，大于`>`，小于`<`，等于 `=` ，大于等于 `>=` ，小于等于 `<=` ：
 
 ![image](https://user-images.githubusercontent.com/31027645/65767326-211a6a00-e160-11e9-9a82-902c35200d80.png)
 
@@ -142,7 +142,7 @@ SELECT * FROM table_name ;
 SELECT * FROM table_name WHERE num_column_name >= 1;
 ```
 
-文本类：某个字段（字符串类型的，比如char，text）：
+文本类：某个字段（字符串类型的，比如 char，text）：
 
 ```mysql
 SELECT * FROM table_name WHERE str_column_name like “%your_str%”;
@@ -156,11 +156,11 @@ SELECT * FROM table_name WHERE num_column_name_1 >= 1 and  str_column_name like 
 ```
 ![image](https://user-images.githubusercontent.com/31027645/65767478-938b4a00-e160-11e9-906b-02ccddfbfad0.png)
 
-## 三、sql语句：修改表属性
+## 三、sql 语句：修改表属性
 
 横向的一整条数据，叫做行；竖向的一整条数据，叫作列。列的名字，叫做 `column`，这是通用的知识点。
 
-这段时间的实战中，我完全没有用到修改表的名称、重设index等知识点。最常用的，就是对列进行操作。每个列具备：列的名称、列的属性、列的数值。
+这段时间的实战中，我完全没有用到修改表的名称、重设 index 等知识点。最常用的，就是对列进行操作。每个列具备：列的名称、列的属性、列的数值。
 
 列的名称，需要留心不使用保留词。我的技巧是，尽量用一些`_`来表达该数据，比如 `article_title`，`press_date` 这种命名虽然稍长，但易读，也不会装上保留词。
 
@@ -170,14 +170,14 @@ SELECT * FROM table_name WHERE num_column_name_1 >= 1 and  str_column_name like 
 
 对列的名称、列的属性进行修改，主要的关键词都是 `ALTER`，具体又分为以下几种情况。
 
-### 情境A：新增一列。关键词 `ADD` 
+### 情境 A：新增一列。关键词 `ADD` 
 
 在你所指定的 `column_name ` 后面定义列的属性。
 
 ```mysql
 ALTER TABLE table_name ADD COLUMN column_name char(20);
 ```
-### 情境B：修改某列的名称。关键词 `CHANGE`
+### 情境 B：修改某列的名称。关键词 `CHANGE`
 
 在修改列名的同时也可以重新指定列的属性。
 
@@ -185,14 +185,14 @@ ALTER TABLE table_name ADD COLUMN column_name char(20);
 ALTER TABLE table_name CHANGE old_column_name new_column_name char(50);
 ```
 
-### 情境C：修改某列的属性。关键词是 `MODIFY`
+### 情境 C：修改某列的属性。关键词是 `MODIFY`
 
 ```mysql
 ALTER TABLE table_name MODIFY column_name char(100);
 ```
 
 
-## 四、sql语句：数据的增改删
+## 四、sql 语句：数据的增改删
 
 通常提到数据库操作时，四字以蔽之：增删改查。
 - 查询，请看第二部分。关键词是 `SELECT`。
@@ -234,6 +234,6 @@ DELETE TABLE table_name;
 DELETE DATABASE database_name;
 ```
 
-如果简单总结下过去一个月，使用`mysql`的体验，那就是：除了mysql 的安装激活太麻烦，数据的增删改查比操作文本方便太多了！！完全值得容忍安装激活的麻烦。另外 mysql 常用语法确实简单、非常有规律。
+如果简单总结下过去一个月，使用`mysql`的体验，那就是：除了 mysql 的安装激活太麻烦，数据的增删改查比操作文本方便太多了！！完全值得容忍安装激活的麻烦。另外 mysql 常用语法确实简单、非常有规律。
 
-希望我的总结带给你帮助。鼓励我继续分享，那就请点个赞吧！勘误请留言，或挪步我的github：[https://github.com/liujuanjuan1984/ucanuupnobb/issues](https://github.com/liujuanjuan1984/ucanuupnobb/issues)
+希望我的总结带给你帮助。鼓励我继续分享，那就请点个赞吧！勘误请留言，或挪步我的 github：[https://github.com/liujuanjuan1984/ucanuupnobb/issues](https://github.com/liujuanjuan1984/ucanuupnobb/issues)

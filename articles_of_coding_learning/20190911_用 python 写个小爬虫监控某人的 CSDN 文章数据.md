@@ -1,6 +1,6 @@
 # 用 python 写个小爬虫监控某人的 CSDN 文章数据
 
-用 `python` / `pandas` + `mysql` 写了一个简单的小爬虫，用来爬取 我的 csdn 文章基本数据。`python`代码如下。如果不用 `mysql`，把文件读写的部分改成 `pandas` 的 `read_csv` / `to_csv` 也OK。
+用 `python` / `pandas` + `mysql` 写了一个简单的小爬虫，用来爬取 我的 csdn 文章基本数据。`python`代码如下。如果不用 `mysql`，把文件读写的部分改成 `pandas` 的 `read_csv` / `to_csv` 也 OK。
 
 如果想监控某大佬，或某一组 csdn id 的数据，也可以这么干。不过需要在此基础上简单加工下。
 
@@ -26,7 +26,7 @@ wf_log = open(csdn_path + 'log_csdn_my_article.txt', 'at')
 
 # 读取网页，把读取的数据返回为一个移除了换行空格等符号的 str 对象，供后续 re 处理调用
 def read_url(url):
-    #header库实现随机header，一定程度上克制反爬
+    #header 库实现随机 header，一定程度上克制反爬
     headers_list = [
         ("User-Agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.112 Safari/537.38"),
     ]

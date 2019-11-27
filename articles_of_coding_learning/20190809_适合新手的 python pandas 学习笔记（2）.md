@@ -4,7 +4,7 @@
 
 在[适合新手的 python pandas 学习笔记(1)](https://mp.weixin.qq.com/s/87FsOZE2AVAP5fD7dbOdXw)中，准备工作已经完成。同时我也通过探索找到了适合自己的学习入口：先了解 pandas 所特有的数据结构`series`与`dateframe`。
 
-昨天，我并没有按照官方的[`10 minutes to pandas`](https://pandas.pydata.org/pandas-docs/version/0.22.0/10min.html)完整地练习一遍，但我已经知道这两种数据容器**有**增删改查、IO处理等各种方法，只是还没用过。我决定，结合一个实际的需求试着把 pandas 先用起来。我预料到这个过程中将会遇到很多新知识，但我心中有数一点不慌，无非是根据实际所需在手头材料中检索而已，现学现用吧。
+昨天，我并没有按照官方的[`10 minutes to pandas`](https://pandas.pydata.org/pandas-docs/version/0.22.0/10min.html)完整地练习一遍，但我已经知道这两种数据容器**有**增删改查、IO 处理等各种方法，只是还没用过。我决定，结合一个实际的需求试着把 pandas 先用起来。我预料到这个过程中将会遇到很多新知识，但我心中有数一点不慌，无非是根据实际所需在手头材料中检索而已，现学现用吧。
 
 这种不会就敢用的学习方法，其实非常“大胆”，并不适合绝大多数人。为什么呢？因为有些人善于把遇到的困难经自己的大脑认知加工成挫败体验，而我似乎很善于解决问题和主动调控成长体验，于是我在拆解和反复地找到答案的过程中，收获的是持续的成就感。
 
@@ -59,28 +59,28 @@
 
 ## 今日的学习成果
 
-为了完成这个需求，我读`pandas`官网文档，不仅仅是10分钟上手部分，更多看的是IO tools那部分。`pandas`的方法如此简约、直白。相关的方法，拿来即用。只不过必须要知道自己想要什么。比如，“如何从url获取数据？”或者“如何从嵌套的字典中，取出内层的字典，然后把数据和外层字典数据合并？”在获取此类疑问的答案时，我也走了些弯路，但一旦知道答案后，就再次惊喜于`dataframe`作为数据容器，如此好用。
+为了完成这个需求，我读`pandas`官网文档，不仅仅是 10 分钟上手部分，更多看的是 IO tools 那部分。`pandas`的方法如此简约、直白。相关的方法，拿来即用。只不过必须要知道自己想要什么。比如，“如何从 url 获取数据？”或者“如何从嵌套的字典中，取出内层的字典，然后把数据和外层字典数据合并？”在获取此类疑问的答案时，我也走了些弯路，但一旦知道答案后，就再次惊喜于`dataframe`作为数据容器，如此好用。
 
 没有花太多时间，我就用`pandas`完成了从 api url 获取数据，并与文件读写交互这个需求。
 
-调试完代码后，我哭笑不得，和我原来的实现方法相比，简直一个在天，一个在地。揣摩了许久，我越来越惊喜，自己昨晚怎么就一下子抓到了重点：**用pandas的核心，应该是把数据整理为结构化的数据后再用它的方法处理**。
+调试完代码后，我哭笑不得，和我原来的实现方法相比，简直一个在天，一个在地。揣摩了许久，我越来越惊喜，自己昨晚怎么就一下子抓到了重点：**用 pandas 的核心，应该是把数据整理为结构化的数据后再用它的方法处理**。
 
-代码仅有区区10行。
+代码仅有区区 10 行。
 
 ```python
 
 import pandas as pd
 import os.path
 
-url = 'https://url.path'# api url不能公开，现在放的这个是假数据
+url = 'https://url.path'# api url 不能公开，现在放的这个是假数据
 rlt_file = 'd:/pandas_rlt.xls'
 
-df1 = pd.read_json(url) #读出来的数据，就是dataframe
-df2 = pd.DataFrame([x for x in df1['comments']])#把comments抽出来
-df3 = pd.DataFrame([x for x in df2['user']])#把comments内嵌的user抽出来
-df = pd.concat([df2,df3], axis=1)#把user数据和comments数据合并
-df.to_excel(rlt_file, encoding='utf-8') #数据写excel文件
-xdf = pd.read_excel(rlt_file, encoding='utf-8') #从excel文件读数据
+df1 = pd.read_json(url) #读出来的数据，就是 dataframe
+df2 = pd.DataFrame([x for x in df1['comments']])#把 comments 抽出来
+df3 = pd.DataFrame([x for x in df2['user']])#把 comments 内嵌的 user 抽出来
+df = pd.concat([df2,df3], axis=1)#把 user 数据和 comments 数据合并
+df.to_excel(rlt_file, encoding='utf-8') #数据写 excel 文件
+xdf = pd.read_excel(rlt_file, encoding='utf-8') #从 excel 文件读数据
 
 ```
 
@@ -97,7 +97,7 @@ def read_url_to_dict(url):
     webpage = request.urlopen(url)
     data = webpage.read() #<class 'bytes'>
     content_str = data.decode("utf-8") #<class 'str'>
-    #如果你的编辑器提醒你没有安装json，你搜索一下安装即可
+    #如果你的编辑器提醒你没有安装 json，你搜索一下安装即可
     import json
     content_dict = json.loads(content_str)
     return content_dict
@@ -107,8 +107,8 @@ def dict_write_json_file(content_dict,file_url="d:/json_file.json"):
     import os.path
     with open(file_url,'w',encoding='utf-8') as write_f:
         json.dump(content_dict,write_f,ensure_ascii=False,sort_keys=True, indent=4)
-    print('数据dict已写入文件：',file_url)
-# 读取 .json文件 生成dict字典
+    print('数据 dict 已写入文件：',file_url)
+# 读取 .json 文件 生成 dict 字典
 def read_json_file_to_dict(file_url="d:/json_file.json"):
     import json
     import os.path
@@ -126,7 +126,7 @@ how_many_comms = data_dic['total']#总的留言条数，int
 all_comms_list = data_dic['comments']#总的留言列表，list
 
 content_list = []
-date_list = [] #留言不为0的日期，list
+date_list = [] #留言不为 0 的日期，list
 time_list = []
 urs_list=[]#留言的用户列表,list
 up_vote_list=[]
@@ -201,13 +201,13 @@ f.save(saved_url)
 
 ```
 
-特别可笑的是，在设置 sheet.write()的行列参数时，要一条条在excel表格中布好，然后小心翼翼逐个修改对应的参数值。
+特别可笑的是，在设置 sheet.write()的行列参数时，要一条条在 excel 表格中布好，然后小心翼翼逐个修改对应的参数值。
 
 为`pandas`作为数据统计与分析领域的最佳实践而干杯！
 
 ## 下一步学习计划
 
-通过第2天的以用促学，我对`pandas`代码的简约，`dataframe`数据结构的好用，印象深刻，赞誉不断。我掌握了`pandas`创建`dataframe`的方法，也掌握了`pandas`部分IO处理的方法。
+通过第 2 天的以用促学，我对`pandas`代码的简约，`dataframe`数据结构的好用，印象深刻，赞誉不断。我掌握了`pandas`创建`dataframe`的方法，也掌握了`pandas`部分 IO 处理的方法。
 
 接下来我依然围绕自己的这个实际需求，用`pandas`来处理数据的统计与分析。我能预料到的是，这将反复练习增删改查中的“查”，相关的具体方法是什么？我不会，但我不着急，因为准备工作中的学习材料中都有，我想用，立即查就是了。用多几次，我自然就懂了。
 
